@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470" role="img" aria-label="结构体字段与 JSON 键的映射剖面，标注 omitempty、json 减号与未知字段被丢弃的位置">
+  <defs>
+    <marker id="arrDark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b3a2b"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9a6b3f"/>
+    </marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a04b3a"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="470" fill="#F7F8F4"/>
+  <text x="400" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2421">JSON 是另一套边界：struct tag 定义翻译规则</text>
+  <text x="400" y="54" text-anchor="middle" font-size="13" fill="#9a6b3f">左：类型世界　右：文本世界　箭头 = 翻译　× = 留在门外</text>
+
+  <!-- 翻译边界竖线 -->
+  <line x1="400" y1="86" x2="400" y2="316" stroke="#9a6b3f" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="400" y="78" text-anchor="middle" font-size="12" fill="#9a6b3f">翻译边界</text>
+
+  <!-- 左：Go 类型世界 -->
+  <rect x="40" y="86" width="300" height="240" rx="8" fill="#E6EDF5" stroke="#4a6a9a" stroke-width="2"/>
+  <text x="190" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">Go 类型世界 struct user</text>
+
+  <rect x="56" y="120" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#4a6a9a"/>
+  <text x="66" y="140" font-size="12" fill="#1f2421">ID int64　json:"id"</text>
+  <rect x="56" y="158" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#4a6a9a"/>
+  <text x="66" y="178" font-size="12" fill="#1f2421">Name string　json:"name"</text>
+  <rect x="56" y="196" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#9a6b3f"/>
+  <text x="66" y="216" font-size="12" fill="#1f2421">Note string　json:"note<tspan fill="#9a6b3f">,omitempty</tspan>"</text>
+  <rect x="56" y="234" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#4a6a9a"/>
+  <text x="66" y="254" font-size="12" fill="#1f2421">kind string　<tspan fill="#a04b3a">未导出</tspan></text>
+  <rect x="56" y="272" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#4a6a9a"/>
+  <text x="66" y="292" font-size="12" fill="#1f2421">Internal string　json:"-"</text>
+
+  <!-- 右：文本世界 -->
+  <rect x="460" y="86" width="300" height="240" rx="8" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="610" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">JSON 文本（键的集合）</text>
+
+  <rect x="476" y="120" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#4a7a46"/>
+  <text x="486" y="140" font-size="12" fill="#1f2421">"id"</text>
+  <rect x="476" y="158" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#4a7a46"/>
+  <text x="486" y="178" font-size="12" fill="#1f2421">"name"</text>
+  <rect x="476" y="196" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#9a6b3f"/>
+  <text x="486" y="216" font-size="12" fill="#1f2421">"note"<tspan fill="#9a6b3f">　空值时整个键缺席</tspan></text>
+  <rect x="476" y="234" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#4a7a46"/>
+  <text x="486" y="254" font-size="12" fill="#1f2421">"role"<tspan fill="#a04b3a">　对方多发的键</tspan></text>
+  <rect x="476" y="272" width="268" height="30" rx="5" fill="#F7F8F4" stroke="#c9cfc4"/>
+  <text x="486" y="292" font-size="12" fill="#9a6b3f">（没有 kind 的对应键）</text>
+
+  <!-- 通行箭头 -->
+  <path d="M326 135 L 472 135" fill="none" stroke="#2b3a2b" stroke-width="2.2" marker-end="url(#arrDark)"/>
+  <path d="M326 173 L 472 173" fill="none" stroke="#2b3a2b" stroke-width="2.2" marker-end="url(#arrDark)"/>
+  <path d="M326 211 L 472 211" fill="none" stroke="#9a6b3f" stroke-width="2.2" stroke-dasharray="5 3" marker-end="url(#arrOrange)"/>
+  <text x="399" y="205" text-anchor="middle" font-size="11" fill="#9a6b3f">omitempty</text>
+
+  <!-- 未导出：被拦下 -->
+  <path d="M326 249 L 392 249" fill="none" stroke="#a04b3a" stroke-width="2" marker-end="url(#arrRed)"/>
+  <text x="359" y="243" text-anchor="middle" font-size="14" fill="#a04b3a">×</text>
+  <path d="M408 249 L 472 249" fill="none" stroke="#c9cfc4" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+  <!-- json:"-"：被拦下 -->
+  <path d="M326 287 L 392 287" fill="none" stroke="#a04b3a" stroke-width="2" marker-end="url(#arrRed)"/>
+  <text x="359" y="281" text-anchor="middle" font-size="14" fill="#a04b3a">×</text>
+  <text x="359" y="302" text-anchor="middle" font-size="10" fill="#a04b3a">主动排除</text>
+  <path d="M408 287 L 472 287" fill="none" stroke="#c9cfc4" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+  <!-- 未知字段：被丢弃 -->
+  <path d="M472 249 L 408 268" fill="none" stroke="#a04b3a" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrRed)"/>
+  <text x="416" y="262" text-anchor="middle" font-size="14" fill="#a04b3a">×</text>
+  <text x="470" y="286" text-anchor="middle" font-size="11" fill="#a04b3a">未知字段：默认被丢弃</text>
+
+  <!-- 底部：两份有损清单 -->
+  <rect x="40" y="346" width="356" height="92" rx="8" fill="#F7F8F4" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="218" y="370" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">有损清单（编码侧）</text>
+  <text x="58" y="394" font-size="12" fill="#1f2421">未导出与 json:"-" 字段不出门</text>
+  <text x="58" y="418" font-size="12" fill="#1f2421">omitempty 把"零值"与"缺席"合并成一种形态</text>
+
+  <rect x="404" y="346" width="356" height="92" rx="8" fill="#F7F8F4" stroke="#4a6a9a" stroke-width="2"/>
+  <text x="582" y="370" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">有损清单（解码侧）</text>
+  <text x="422" y="394" font-size="12" fill="#1f2421">未知字段默认丢弃，DisallowUnknownFields 可收紧</text>
+  <text x="422" y="418" font-size="12" fill="#1f2421">时间与数字换成文本语法，类型信息不过境</text>
+
+  <text x="400" y="456" text-anchor="middle" font-size="13" fill="#1f2421">翻译规则只覆盖两侧都登记过的字段；没登记的，大多被静默处理</text>
+</svg>

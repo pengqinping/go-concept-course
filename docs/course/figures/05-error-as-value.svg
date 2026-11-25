@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 490" width="800" height="490">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4A5544"/>
+    </marker>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#B8860B"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="490" fill="#F7F8F4"/>
+
+  <text x="400" y="40" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#1F2A1B">失败沿调用栈返回，%w 把一次失败串成链</text>
+  <text x="400" y="64" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#4A5544">返回值让失败成为数据；Is 沿链比目标值，As 沿链找目标类型</text>
+
+  <line x1="400" y1="88" x2="400" y2="462" stroke="#C9CFBE" stroke-width="1" stroke-dasharray="5,5"/>
+
+  <text x="190" y="98" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">调用栈：失败往回走</text>
+
+  <rect x="40" y="112" width="300" height="58" rx="6" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.5"/>
+  <text x="190" y="136" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#1F2A1B">main</text>
+  <text x="190" y="158" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">fmt.Errorf("handler: %w", err)</text>
+
+  <rect x="40" y="200" width="300" height="58" rx="6" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.5"/>
+  <text x="190" y="224" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#1F2A1B">loadUser</text>
+  <text x="190" y="246" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">fmt.Errorf("fetch: %w", err)</text>
+
+  <rect x="40" y="288" width="300" height="58" rx="6" fill="#E7EADF" stroke="#7A846F" stroke-width="1.5"/>
+  <text x="190" y="312" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#1F2A1B">fetch</text>
+  <text x="190" y="334" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">&amp;LookupError{cause: ErrNotFound}</text>
+
+  <line x1="190" y1="288" x2="190" y2="260" stroke="#4A5544" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="190" y1="200" x2="190" y2="172" stroke="#4A5544" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="210" y="278" font-family="sans-serif" font-size="11" fill="#4A5544">return err</text>
+  <text x="210" y="190" font-family="sans-serif" font-size="11" fill="#4A5544">return err</text>
+
+  <text x="190" y="382" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1F2A1B">失败是普通返回值</text>
+  <text x="190" y="408" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">每层的清理交给 defer，不漏在失败路径上</text>
+
+  <text x="600" y="98" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">错误链：每层挂住一个原因</text>
+
+  <rect x="430" y="112" width="340" height="42" rx="6" fill="#FFFDF7" stroke="#B8860B" stroke-width="1.5"/>
+  <text x="600" y="139" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F2A1B">handler: fetch: id=404: lookup ...: not found</text>
+
+  <rect x="430" y="170" width="340" height="42" rx="6" fill="#FFFDF7" stroke="#B8860B" stroke-width="1.5"/>
+  <text x="600" y="197" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F2A1B">fetch: id=404: lookup ...: not found</text>
+
+  <rect x="430" y="228" width="340" height="42" rx="6" fill="#FFFDF7" stroke="#B8860B" stroke-width="1.5"/>
+  <text x="600" y="255" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1F2A1B">id=404: lookup ...: not found</text>
+
+  <rect x="430" y="286" width="340" height="42" rx="6" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.5"/>
+  <text x="600" y="313" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#1F2A1B">*LookupError：ID=404 Kind=missing</text>
+
+  <rect x="430" y="344" width="340" height="42" rx="6" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.5"/>
+  <text x="600" y="371" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#1F2A1B">not found（哨兵 ErrNotFound）</text>
+
+  <line x1="470" y1="154" x2="470" y2="168" stroke="#B8860B" stroke-width="1.4" marker-end="url(#arrowGold)"/>
+  <line x1="470" y1="212" x2="470" y2="226" stroke="#B8860B" stroke-width="1.4" marker-end="url(#arrowGold)"/>
+  <line x1="470" y1="270" x2="470" y2="284" stroke="#B8860B" stroke-width="1.4" marker-end="url(#arrowGold)"/>
+  <line x1="470" y1="328" x2="470" y2="342" stroke="#B8860B" stroke-width="1.4" marker-end="url(#arrowGold)"/>
+  <text x="486" y="167" font-family="sans-serif" font-size="10" fill="#8A6A1F">Unwrap()</text>
+  <text x="486" y="225" font-family="sans-serif" font-size="10" fill="#8A6A1F">Unwrap()</text>
+  <text x="486" y="283" font-family="sans-serif" font-size="10" fill="#8A6A1F">Unwrap()</text>
+  <text x="486" y="341" font-family="sans-serif" font-size="10" fill="#8A6A1F">Unwrap()</text>
+
+  <path d="M 600 388 L 600 400 L 195 400 L 195 412" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-dasharray="6,4" marker-end="url(#arrowGold)"/>
+  <path d="M 600 388 L 600 400 L 595 400 L 595 412" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-dasharray="6,4" marker-end="url(#arrowGold)"/>
+
+  <rect x="30" y="414" width="335" height="56" rx="6" fill="#F0E6C8" stroke="#B8860B" stroke-width="1.5"/>
+  <text x="197" y="438" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#1F2A1B">errors.Is(err, ErrNotFound)</text>
+  <text x="197" y="458" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">沿链逐个比较 → true</text>
+
+  <rect x="425" y="414" width="345" height="56" rx="6" fill="#F0E6C8" stroke="#B8860B" stroke-width="1.5"/>
+  <text x="597" y="438" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#1F2A1B">errors.As(err, &amp;le)</text>
+  <text x="597" y="458" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">沿链找 *LookupError → 命中 ID=404</text>
+</svg>

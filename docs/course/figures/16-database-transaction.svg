@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="事务的 Begin 到 Commit 与 Rollback 状态链，以及拼接 SQL 与参数化查询的对照">
+  <defs>
+    <marker id="arrDark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b3a2b"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9a6b3f"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" fill="#F7F8F4"/>
+  <text x="400" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2421">事务的边界：Begin → 语句 → Commit / Rollback</text>
+  <text x="400" y="54" text-anchor="middle" font-size="13" fill="#9a6b3f">边界由两个显式动作闭合，没有第三个结局</text>
+
+  <!-- 状态链 -->
+  <rect x="40" y="80" width="130" height="60" rx="8" fill="#E6EDF5" stroke="#4a6a9a" stroke-width="2"/>
+  <text x="105" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">Begin</text>
+  <text x="105" y="126" text-anchor="middle" font-size="12" fill="#1f2421">开出草稿区</text>
+
+  <path d="M172 110 L 202 110" fill="none" stroke="#2b3a2b" stroke-width="2.5" marker-end="url(#arrDark)"/>
+
+  <rect x="206" y="80" width="170" height="60" rx="8" fill="#E6EDF5" stroke="#4a6a9a" stroke-width="2"/>
+  <text x="291" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">语句 1：扣款</text>
+  <text x="291" y="126" text-anchor="middle" font-size="12" fill="#1f2421">只写在草稿上</text>
+
+  <path d="M378 110 L 408 110" fill="none" stroke="#2b3a2b" stroke-width="2.5" marker-end="url(#arrDark)"/>
+
+  <rect x="412" y="80" width="170" height="60" rx="8" fill="#E6EDF5" stroke="#4a6a9a" stroke-width="2"/>
+  <text x="497" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">语句 2：入账</text>
+  <text x="497" y="126" text-anchor="middle" font-size="12" fill="#1f2421">只写在草稿上</text>
+
+  <!-- 成功分支 -->
+  <path d="M584 100 L 634 100" fill="none" stroke="#4a7a46" stroke-width="2.5" marker-end="url(#arrDark)"/>
+  <text x="606" y="90" text-anchor="middle" font-size="11" fill="#4a7a46">全成功</text>
+  <rect x="638" y="72" width="130" height="56" rx="8" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="703" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">Commit</text>
+  <text x="703" y="115" text-anchor="middle" font-size="12" fill="#4a7a46">草稿一次性生效</text>
+
+  <!-- 失败分支 -->
+  <path d="M497 142 C 497 190, 700 150, 703 176" fill="none" stroke="#9a6b3f" stroke-width="2.5" stroke-dasharray="6 3" marker-end="url(#arrOrange)"/>
+  <text x="470" y="168" text-anchor="end" font-size="11" fill="#9a6b3f">任一步失败</text>
+  <rect x="638" y="178" width="130" height="72" rx="8" fill="#F3E8DC" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="703" y="202" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">Rollback</text>
+  <text x="703" y="222" text-anchor="middle" font-size="12" fill="#9a6b3f">草稿整体丢弃</text>
+  <text x="703" y="238" text-anchor="middle" font-size="12" fill="#9a6b3f">语句 1 一并撤销</text>
+
+  <line x1="24" y1="278" x2="776" y2="278" stroke="#c9cfc4" stroke-width="1.5"/>
+  <text x="400" y="302" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f2421">同一输入，两种查询构造方式</text>
+
+  <!-- 拼接版 -->
+  <rect x="40" y="318" width="180" height="50" rx="8" fill="#F3E8DC" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="130" y="338" text-anchor="middle" font-size="12" fill="#1f2421">输入 ' OR '1'='1</text>
+  <text x="130" y="356" text-anchor="middle" font-size="11" fill="#9a6b3f">含有引号与 OR</text>
+
+  <path d="M222 343 L 252 343" fill="none" stroke="#9a6b3f" stroke-width="2.2" marker-end="url(#arrOrange)"/>
+
+  <rect x="256" y="318" width="180" height="50" rx="8" fill="#F3E8DC" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="346" y="338" text-anchor="middle" font-size="12" fill="#1f2421">拼进 SQL 文本</text>
+  <text x="346" y="356" text-anchor="middle" font-size="11" fill="#9a6b3f">数据与语法同一条路</text>
+
+  <path d="M438 343 L 468 343" fill="none" stroke="#9a6b3f" stroke-width="2.2" marker-end="url(#arrOrange)"/>
+
+  <rect x="472" y="318" width="180" height="50" rx="8" fill="#F3E8DC" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="562" y="338" text-anchor="middle" font-size="12" fill="#1f2421">解析器读文本</text>
+  <text x="562" y="356" text-anchor="middle" font-size="11" fill="#9a6b3f">引号闭合，OR 恒真</text>
+
+  <path d="M654 343 L 684 343" fill="none" stroke="#9a6b3f" stroke-width="2.2" marker-end="url(#arrOrange)"/>
+
+  <rect x="688" y="318" width="80" height="50" rx="8" fill="#F3E8DC" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="728" y="340" text-anchor="middle" font-size="12" font-weight="bold" fill="#a04b3a">3/3 行</text>
+  <text x="728" y="356" text-anchor="middle" font-size="11" fill="#9a6b3f">数据变代码</text>
+
+  <!-- 参数化版 -->
+  <rect x="40" y="392" width="180" height="50" rx="8" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="130" y="412" text-anchor="middle" font-size="12" fill="#1f2421">同一输入</text>
+  <text x="130" y="430" text-anchor="middle" font-size="11" fill="#4a7a46">一个普通字符串</text>
+
+  <path d="M222 417 L 252 417" fill="none" stroke="#2b3a2b" stroke-width="2.2" marker-end="url(#arrDark)"/>
+
+  <rect x="256" y="392" width="180" height="50" rx="8" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="346" y="412" text-anchor="middle" font-size="12" fill="#1f2421">参数通道</text>
+  <text x="346" y="430" text-anchor="middle" font-size="11" fill="#4a7a46">文本与值分离</text>
+
+  <path d="M438 417 L 468 417" fill="none" stroke="#2b3a2b" stroke-width="2.2" marker-end="url(#arrDark)"/>
+
+  <rect x="472" y="392" width="180" height="50" rx="8" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="562" y="412" text-anchor="middle" font-size="12" fill="#1f2421">文本固定：name = $1</text>
+  <text x="562" y="430" text-anchor="middle" font-size="11" fill="#4a7a46">引号只是字符</text>
+
+  <path d="M654 417 L 684 417" fill="none" stroke="#2b3a2b" stroke-width="2.2" marker-end="url(#arrDark)"/>
+
+  <rect x="688" y="392" width="80" height="50" rx="8" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="728" y="414" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a7a46">0/3 行</text>
+  <text x="728" y="430" text-anchor="middle" font-size="11" fill="#4a7a46">数据留数据侧</text>
+
+  <text x="400" y="474" text-anchor="middle" font-size="13" fill="#1f2421">真实项目用 database/sql + 驱动：参数化不靠转义，靠通道分离</text>
+</svg>

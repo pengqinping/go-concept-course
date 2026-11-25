@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 540" width="800" height="540" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+  <defs>
+    <marker id="arrowRed" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#B23B36"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#2E7D4F"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="540" fill="#F7F8F4"/>
+
+  <text x="28" y="36" font-size="18" font-weight="700" fill="#1F2933">竞态时间线 vs Mutex 串行化</text>
+  <text x="28" y="60" font-size="12" fill="#4B5563">同一变量的两次更新：交错时丢一次；串行化后两次都算数</text>
+
+  <!-- ① 竞态 -->
+  <text x="28" y="96" font-size="14" font-weight="700" fill="#9B3B36">① 竞态：两次读都看到 0</text>
+  <line x1="165" y1="118" x2="165" y2="222" stroke="#C9CFC4" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="245" y1="118" x2="245" y2="222" stroke="#C9CFC4" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="395" y1="118" x2="395" y2="222" stroke="#C9CFC4" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <text x="30" y="150" font-size="13" font-weight="700" fill="#374151">G1</text>
+  <rect x="100" y="126" width="130" height="36" rx="6" fill="#F6E2E0" stroke="#9B3B36"/>
+  <text x="165" y="150" font-size="12" fill="#1F2933" text-anchor="middle">读 counter = 0</text>
+  <line x1="232" y1="144" x2="326" y2="144" stroke="#B23B36" stroke-width="1.8" marker-end="url(#arrowRed)"/>
+  <rect x="330" y="126" width="130" height="36" rx="6" fill="#F6E2E0" stroke="#9B3B36"/>
+  <text x="395" y="150" font-size="12" fill="#1F2933" text-anchor="middle">写 counter = 1</text>
+
+  <text x="30" y="202" font-size="13" font-weight="700" fill="#374151">G2</text>
+  <rect x="180" y="178" width="130" height="36" rx="6" fill="#F6E2E0" stroke="#9B3B36"/>
+  <text x="245" y="202" font-size="12" fill="#1F2933" text-anchor="middle">读 counter = 0</text>
+  <line x1="312" y1="196" x2="426" y2="196" stroke="#B23B36" stroke-width="1.8" marker-end="url(#arrowRed)"/>
+  <rect x="430" y="178" width="130" height="36" rx="6" fill="#F6E2E0" stroke="#9B3B36"/>
+  <text x="495" y="202" font-size="12" fill="#1F2933" text-anchor="middle">写 counter = 1</text>
+
+  <rect x="600" y="140" width="170" height="56" rx="8" fill="#FDECEA" stroke="#B23B36" stroke-width="1.5"/>
+  <text x="685" y="164" font-size="16" font-weight="700" fill="#1F2933" text-anchor="middle">counter = 1</text>
+  <text x="685" y="186" font-size="11" fill="#9B3B36" text-anchor="middle">丢了一次更新</text>
+
+  <text x="28" y="240" font-size="11" fill="#4B5563">load → add → store 三步被打断：两个 load 都拿到 0，两个 store 都写回 1</text>
+
+  <line x1="28" y1="262" x2="772" y2="262" stroke="#D7DBD2" stroke-width="1"/>
+
+  <!-- ② Mutex 串行化 -->
+  <text x="28" y="292" font-size="14" font-weight="700" fill="#2E7D4F">② Mutex 串行化：临界区内不可被打断</text>
+
+  <text x="30" y="340" font-size="13" font-weight="700" fill="#374151">G1</text>
+  <rect x="100" y="318" width="74" height="36" rx="6" fill="#E6F2E9" stroke="#2E7D4F"/>
+  <text x="137" y="342" font-size="12" fill="#1F2933" text-anchor="middle">Lock</text>
+  <line x1="176" y1="336" x2="186" y2="336" stroke="#2E7D4F" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+  <rect x="190" y="318" width="74" height="36" rx="6" fill="#E6F2E9" stroke="#2E7D4F"/>
+  <text x="227" y="342" font-size="12" fill="#1F2933" text-anchor="middle">读 0</text>
+  <line x1="266" y1="336" x2="276" y2="336" stroke="#2E7D4F" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+  <rect x="280" y="318" width="74" height="36" rx="6" fill="#E6F2E9" stroke="#2E7D4F"/>
+  <text x="317" y="342" font-size="12" fill="#1F2933" text-anchor="middle">写 1</text>
+  <line x1="356" y1="336" x2="366" y2="336" stroke="#2E7D4F" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+  <rect x="370" y="318" width="86" height="36" rx="6" fill="#E6F2E9" stroke="#2E7D4F"/>
+  <text x="413" y="342" font-size="12" fill="#1F2933" text-anchor="middle">Unlock</text>
+
+  <text x="30" y="400" font-size="13" font-weight="700" fill="#374151">G2</text>
+  <rect x="100" y="378" width="94" height="36" rx="6" fill="#EEF2EA" stroke="#7A9B62" stroke-dasharray="4 3"/>
+  <text x="147" y="402" font-size="12" fill="#4B5563" text-anchor="middle">Lock（等）</text>
+  <line x1="196" y1="396" x2="206" y2="396" stroke="#2E7D4F" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+  <rect x="210" y="378" width="74" height="36" rx="6" fill="#E6F2E9" stroke="#2E7D4F"/>
+  <text x="247" y="402" font-size="12" fill="#1F2933" text-anchor="middle">读 1</text>
+  <line x1="286" y1="396" x2="296" y2="396" stroke="#2E7D4F" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+  <rect x="300" y="378" width="74" height="36" rx="6" fill="#E6F2E9" stroke="#2E7D4F"/>
+  <text x="337" y="402" font-size="12" fill="#1F2933" text-anchor="middle">写 2</text>
+  <line x1="376" y1="396" x2="386" y2="396" stroke="#2E7D4F" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+  <rect x="390" y="378" width="86" height="36" rx="6" fill="#E6F2E9" stroke="#2E7D4F"/>
+  <text x="433" y="402" font-size="12" fill="#1F2933" text-anchor="middle">Unlock</text>
+
+  <rect x="600" y="340" width="170" height="56" rx="8" fill="#E9F4EC" stroke="#2E7D4F" stroke-width="1.5"/>
+  <text x="685" y="364" font-size="16" font-weight="700" fill="#1F2933" text-anchor="middle">counter = 2</text>
+  <text x="685" y="386" font-size="11" fill="#2E7D4F" text-anchor="middle">两次更新都生效</text>
+
+  <text x="28" y="436" font-size="11" fill="#4B5563">Unlock happens-before 下一个 Lock：G2 读到 G1 写进去的 1</text>
+
+  <!-- ③ 原子操作范围 -->
+  <rect x="28" y="460" width="744" height="58" rx="6" fill="#EEEFE8" stroke="#9AA08F"/>
+  <text x="42" y="483" font-size="13" font-weight="700" fill="#1F2933">③ 原子操作的适用范围</text>
+  <text x="42" y="505" font-size="11" fill="#374151">atomic.AddInt64(&amp;n,1) 单步不可拆；但“先读再判断再写”仍需 CAS 循环或 Mutex；多个变量的一致性不能靠单次原子操作。</text>
+</svg>

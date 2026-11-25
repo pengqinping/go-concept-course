@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470" role="img" aria-labelledby="t d">
+  <title id="t">红绿重构循环与依赖倒置边界</title>
+  <desc id="d">上半部分展示红、绿、重构三态循环；下半部分对比直连依赖与可替换依赖，说明测试如何逼出边界。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="470" fill="#F7F8F4"/>
+  <g font-family="PingFang SC,Microsoft YaHei,sans-serif">
+    <text x="40" y="46" font-size="23" font-weight="700" fill="#1f2937">测试是设计反馈：一个循环，一条边界</text>
+    <text x="40" y="74" font-size="14" fill="#475569">左半：反复跑的循环。右半：为了让期望可核对，依赖必须能被替换。</text>
+
+    <text x="40" y="112" font-size="15" font-weight="700" fill="#1f2937">① 红 → 绿 → 重构：每次变红都指出下一处边界</text>
+
+    <g stroke-width="2" fill="#fee2e2" stroke="#b91c1c">
+      <rect x="60" y="130" width="180" height="68" rx="12"/>
+    </g>
+    <g stroke-width="2" fill="#dcfce7" stroke="#15803d">
+      <rect x="310" y="130" width="180" height="68" rx="12"/>
+    </g>
+    <g stroke-width="2" fill="#e0e7ff" stroke="#4338ca">
+      <rect x="560" y="130" width="180" height="68" rx="12"/>
+    </g>
+
+    <g text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">
+      <text x="150" y="158">红 · 写失败的期望</text>
+      <text x="400" y="158">绿 · 最小实现</text>
+      <text x="650" y="158">重构 · 挪走依赖</text>
+    </g>
+    <g text-anchor="middle" font-size="12" fill="#475569">
+      <text x="150" y="180">先说清要什么</text>
+      <text x="400" y="180">只做到刚好通过</text>
+      <text x="650" y="180">留下可核对的规则</text>
+    </g>
+
+    <g fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)">
+      <line x1="240" y1="164" x2="308" y2="164"/>
+      <line x1="490" y1="164" x2="558" y2="164"/>
+    </g>
+    <path d="M650,198 L650,236 L150,236 L150,202" fill="none" stroke="#b91c1c" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrowRed)"/>
+    <text x="400" y="256" text-anchor="middle" font-size="12" fill="#b91c1c">下一轮：再加一个边界用例</text>
+
+    <line x1="40" y1="276" x2="760" y2="276" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="40" y="304" font-size="15" font-weight="700" fill="#1f2937">② 同一条边界：测试只能核对它能控制的输入</text>
+
+    <rect x="40" y="320" width="340" height="108" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="420" y="320" width="340" height="108" rx="12" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+
+    <text x="60" y="346" font-size="14" font-weight="700" fill="#b91c1c">直连依赖（难测）</text>
+    <text x="60" y="372" font-size="13" fill="#1f2937">ParseID → 全局配置 / 真实时钟 / 存储</text>
+    <text x="60" y="396" font-size="13" fill="#475569">期望无法精确，失败只能碰运气</text>
+    <text x="60" y="416" font-size="12" fill="#64748b">绿灯只说明"这次没报错"</text>
+
+    <text x="440" y="346" font-size="14" font-weight="700" fill="#15803d">依赖倒置（可测）</text>
+    <text x="440" y="372" font-size="13" fill="#1f2937">测试 → 注入已知值 → ParseID</text>
+    <text x="440" y="396" font-size="13" fill="#475569">输入固定、失败可制造、输出可断言</text>
+    <text x="440" y="416" font-size="12" fill="#64748b">绿灯说明"你写下的期望被满足了"</text>
+
+    <g fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)">
+      <line x1="382" y1="374" x2="416" y2="374"/>
+    </g>
+    <text x="399" y="362" text-anchor="middle" font-size="11" fill="#475569">逼出</text>
+
+    <text x="40" y="454" font-size="12" fill="#64748b">颜色只标两态：红 = 期望未满足，绿 = 期望已满足；蓝色仅表示重构动作。</text>
+  </g>
+</svg>

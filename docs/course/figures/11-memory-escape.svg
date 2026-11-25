@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470" role="img" aria-label="栈帧与堆之间的指针逃逸路径，以及 GC roots 决定可达性的示意">
+  <defs>
+    <marker id="arrDark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b3a2b"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9a6b3f"/>
+    </marker>
+    <marker id="arrGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="470" fill="#F7F8F4"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2421">内存去哪了：逃逸决定放哪，可达性决定何时收回</text>
+
+  <!-- 上半：栈帧 → 堆 的逃逸路径 -->
+  <rect x="24" y="58" width="228" height="176" rx="10" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="138" y="84" text-anchor="middle" font-size="16" font-weight="bold" fill="#1f2421">栈（每个 Goroutine 一份）</text>
+  <rect x="40" y="98" width="196" height="58" rx="6" fill="#F7F8F4" stroke="#4a7a46"/>
+  <text x="52" y="121" font-size="14" fill="#1f2421">newValue 栈帧</text>
+  <text x="52" y="143" font-size="14" fill="#1f2421">x := 42　p := &amp;x</text>
+  <rect x="40" y="166" width="196" height="52" rx="6" fill="#F7F8F4" stroke="#4a7a46"/>
+  <text x="52" y="189" font-size="14" fill="#1f2421">调用者栈帧</text>
+  <text x="52" y="210" font-size="14" fill="#1f2421">p 仍指向那块内存</text>
+
+  <path d="M252 127 C 340 127, 404 138, 494 138" fill="none" stroke="#9a6b3f" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrOrange)"/>
+  <text x="372" y="116" text-anchor="middle" font-size="14" font-weight="bold" fill="#9a6b3f">逃逸</text>
+  <text x="372" y="160" text-anchor="middle" font-size="12" fill="#9a6b3f">编译器把 x 挪到堆</text>
+
+  <rect x="498" y="58" width="278" height="176" rx="10" fill="#F3E8DC" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="637" y="84" text-anchor="middle" font-size="16" font-weight="bold" fill="#1f2421">堆（全局共享，由 GC 管理）</text>
+  <rect x="548" y="104" width="178" height="62" rx="6" fill="#F7F8F4" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="637" y="128" text-anchor="middle" font-size="15" fill="#1f2421">堆对象：x = 42</text>
+  <text x="637" y="150" text-anchor="middle" font-size="12" fill="#9a6b3f">寿命被延长到函数返回之后</text>
+  <text x="637" y="206" text-anchor="middle" font-size="13" fill="#1f2421">词法作用域没变，变的是存储位置</text>
+
+  <!-- 分隔 -->
+  <line x1="24" y1="252" x2="776" y2="252" stroke="#c9cfc4" stroke-width="1.5"/>
+
+  <!-- 下半：GC roots 决定可达性 -->
+  <text x="40" y="278" font-size="16" font-weight="bold" fill="#1f2421">GC 从 roots 出发：能走到就保留，走不到才回收</text>
+
+  <rect x="40" y="296" width="184" height="124" rx="8" fill="#E6EDF5" stroke="#4a6a9a" stroke-width="2"/>
+  <text x="132" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">GC roots</text>
+  <text x="56" y="343" font-size="13" fill="#1f2421">全局变量</text>
+  <text x="56" y="366" font-size="13" fill="#1f2421">栈上的指针</text>
+  <text x="56" y="389" font-size="13" fill="#1f2421">寄存器</text>
+
+  <path d="M226 358 L 322 358" fill="none" stroke="#2b3a2b" stroke-width="2.5" marker-end="url(#arrDark)"/>
+  <text x="274" y="345" text-anchor="middle" font-size="12" fill="#2b3a2b">沿指针</text>
+
+  <rect x="326" y="296" width="210" height="52" rx="6" fill="#F3E8DC" stroke="#9a6b3f" stroke-width="2"/>
+  <text x="431" y="318" text-anchor="middle" font-size="14" fill="#1f2421">堆对象 x=42</text>
+  <text x="431" y="338" text-anchor="middle" font-size="12" fill="#9a6b3f">有根可达 ⇒ 保留</text>
+
+  <rect x="326" y="368" width="210" height="52" rx="6" fill="#EEEEEE" stroke="#9a9a9a" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="431" y="390" text-anchor="middle" font-size="14" fill="#1f2421">孤立对象</text>
+  <text x="431" y="410" text-anchor="middle" font-size="12" fill="#7a7a7a">无人引用 ⇒ 回收</text>
+
+  <rect x="566" y="296" width="210" height="124" rx="8" fill="#F7F8F4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="671" y="320" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">关键结论</text>
+  <text x="582" y="347" font-size="13" fill="#1f2421">GC 不看变量写在哪里，</text>
+  <text x="582" y="370" font-size="13" fill="#1f2421">只看能不能从 roots 走到。</text>
+  <text x="582" y="397" font-size="13" fill="#1f2421">闭包、接口、全局切片</text>
+  <text x="582" y="416" font-size="13" fill="#1f2421">都可能成为隐藏的根。</text>
+</svg>

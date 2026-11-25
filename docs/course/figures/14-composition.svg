@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440" role="img" aria-label="组合的小接口与委托树，对比深层继承树，并标出包边界的导出规则">
+  <defs>
+    <marker id="arrDark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b3a2b"/>
+    </marker>
+    <marker id="arrGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="440" fill="#F7F8F4"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2421">复用能力：小接口 + 委托（左） vs 深层继承（右）</text>
+
+  <!-- 左：组合 -->
+  <rect x="24" y="56" width="364" height="312" rx="10" fill="#E8F0E4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="206" y="82" text-anchor="middle" font-size="16" font-weight="bold" fill="#1f2421">组合：浅而宽，按能力拼装</text>
+
+  <rect x="60" y="98" width="292" height="48" rx="6" fill="#E6EDF5" stroke="#4a6a9a" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="206" y="119" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">Logger 小接口：Log(msg)</text>
+  <text x="206" y="138" text-anchor="middle" font-size="12" fill="#4a6a9a">由使用方定义，只有一项能力</text>
+
+  <path d="M140 146 L 110 178" fill="none" stroke="#4a6a9a" stroke-width="1.8" stroke-dasharray="5 4"/>
+  <path d="M272 146 L 300 178" fill="none" stroke="#4a6a9a" stroke-width="1.8" stroke-dasharray="5 4"/>
+
+  <rect x="44" y="182" width="150" height="64" rx="6" fill="#F7F8F4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="119" y="205" text-anchor="middle" font-size="14" fill="#1f2421">consoleLogger</text>
+  <text x="119" y="227" text-anchor="middle" font-size="12" fill="#4a7a46">写出日志</text>
+
+  <rect x="224" y="182" width="150" height="64" rx="6" fill="#F7F8F4" stroke="#4a7a46" stroke-width="2"/>
+  <text x="299" y="205" text-anchor="middle" font-size="14" fill="#1f2421">prefixLogger</text>
+  <text x="299" y="227" text-anchor="middle" font-size="12" fill="#4a7a46">嵌入 Logger + 前缀</text>
+
+  <path d="M224 214 L 198 214" fill="none" stroke="#2b3a2b" stroke-width="2.5" marker-end="url(#arrDark)"/>
+  <text x="211" y="205" text-anchor="middle" font-size="11" fill="#2b3a2b">拥有</text>
+
+  <text x="48" y="288" font-size="13" fill="#1f2421">· 满足接口是隐式的，无需声明"我实现了它"</text>
+  <text x="48" y="312" font-size="13" fill="#1f2421">· 换个实现，调用方代码一个字都不用改</text>
+  <text x="48" y="336" font-size="13" fill="#1f2421">· 委托只发生在你显式调用的那一行</text>
+
+  <!-- 右：继承 -->
+  <rect x="412" y="56" width="364" height="312" rx="10" fill="#EEEEEE" stroke="#8a8a8a" stroke-width="2"/>
+  <text x="594" y="82" text-anchor="middle" font-size="16" font-weight="bold" fill="#1f2421">继承：深而窄，固定层级</text>
+
+  <rect x="484" y="98" width="220" height="42" rx="6" fill="#F7F8F4" stroke="#8a8a8a" stroke-width="2"/>
+  <text x="594" y="124" text-anchor="middle" font-size="14" fill="#1f2421">BaseLogger</text>
+  <path d="M594 140 L 594 158" fill="none" stroke="#8a8a8a" stroke-width="2.2" marker-end="url(#arrGray)"/>
+
+  <rect x="484" y="162" width="220" height="42" rx="6" fill="#F7F8F4" stroke="#8a8a8a" stroke-width="2"/>
+  <text x="594" y="188" text-anchor="middle" font-size="14" fill="#1f2421">TimedLogger</text>
+  <path d="M594 204 L 594 222" fill="none" stroke="#8a8a8a" stroke-width="2.2" marker-end="url(#arrGray)"/>
+
+  <rect x="484" y="226" width="220" height="42" rx="6" fill="#F7F8F4" stroke="#8a8a8a" stroke-width="2"/>
+  <text x="594" y="252" text-anchor="middle" font-size="14" fill="#1f2421">PrefixLogger</text>
+  <path d="M594 268 L 594 286" fill="none" stroke="#8a8a8a" stroke-width="2.2" marker-end="url(#arrGray)"/>
+
+  <rect x="484" y="290" width="220" height="42" rx="6" fill="#F7F8F4" stroke="#8a8a8a" stroke-width="2"/>
+  <text x="594" y="316" text-anchor="middle" font-size="14" fill="#1f2421">AuditLogger</text>
+  <text x="594" y="350" text-anchor="middle" font-size="12" fill="#7a7a7a">改父类，整条链都受影响</text>
+
+  <!-- 底：包边界 -->
+  <rect x="24" y="380" width="752" height="46" rx="8" fill="#F7F8F4" stroke="#4a6a9a" stroke-width="2"/>
+  <text x="400" y="400" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f2421">包边界：首字母大写 = 导出 = 对外承诺；小写 = 包内私有</text>
+  <text x="400" y="418" text-anchor="middle" font-size="12" fill="#4a6a9a">跨包只看得见导出的标识符，这本身就是最外层的封装</text>
+</svg>

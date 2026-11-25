@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4A5544"/>
+    </marker>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#B8860B"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="420" fill="#F7F8F4"/>
+
+  <text x="400" y="40" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#1F2A1B">赋值复制的是"值本身"，值里有什么就复制什么</text>
+  <text x="400" y="64" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#4A5544">左右两句都是赋值：左边搬走整块数据，右边只搬走三个数字（描述符）</text>
+
+  <line x1="400" y1="88" x2="400" y2="392" stroke="#C9CFBE" stroke-width="1" stroke-dasharray="5,5"/>
+
+  <text x="200" y="100" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">struct / array：整块值</text>
+
+  <rect x="45" y="130" width="150" height="84" rx="6" fill="#E7EADF" stroke="#7A846F" stroke-width="1.5"/>
+  <text x="120" y="160" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">p  (Point)</text>
+  <text x="120" y="188" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#4A5544">X=1   Y=2</text>
+
+  <line x1="197" y1="172" x2="250" y2="172" stroke="#4A5544" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="224" y="162" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">b := a</text>
+
+  <rect x="255" y="130" width="150" height="84" rx="6" fill="#E7EADF" stroke="#7A846F" stroke-width="1.5"/>
+  <text x="330" y="160" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">q  (Point)</text>
+  <text x="330" y="188" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#4A5544">X=1   Y=2</text>
+
+  <text x="200" y="248" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1F2A1B">改 q.X = 99 → p.X 仍是 1</text>
+  <text x="200" y="276" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">复制整块 16 字节，两份独立存储</text>
+  <text x="200" y="302" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">[4]int 数组同理：复制即分离</text>
+
+  <text x="600" y="100" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">slice：复制描述符</text>
+
+  <rect x="425" y="124" width="140" height="60" rx="6" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.5"/>
+  <text x="495" y="148" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">s（描述符）</text>
+  <text x="495" y="170" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">ptr  len=3  cap=4</text>
+
+  <rect x="605" y="124" width="140" height="60" rx="6" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.5"/>
+  <text x="675" y="148" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">t（描述符）</text>
+  <text x="675" y="170" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">ptr  len=3  cap=4</text>
+
+  <line x1="495" y1="186" x2="535" y2="240" stroke="#B8860B" stroke-width="1.6" marker-end="url(#arrowGold)"/>
+  <line x1="675" y1="186" x2="635" y2="240" stroke="#B8860B" stroke-width="1.6" marker-end="url(#arrowGold)"/>
+
+  <rect x="470" y="240" width="230" height="56" rx="6" fill="#FFFDF7" stroke="#B8860B" stroke-width="1.5"/>
+  <rect x="478" y="248" width="70" height="40" fill="#F0E6C8" stroke="#B8860B" stroke-width="1"/>
+  <rect x="552" y="248" width="70" height="40" fill="#F0E6C8" stroke="#B8860B" stroke-width="1"/>
+  <rect x="626" y="248" width="70" height="40" fill="#F0E6C8" stroke="#B8860B" stroke-width="1"/>
+  <text x="513" y="275" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#1F2A1B">1</text>
+  <text x="587" y="275" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#1F2A1B">2</text>
+  <text x="661" y="275" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#1F2A1B">3</text>
+
+  <text x="585" y="320" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1F2A1B">同一底层数组：改 t[0] 就是改 s[0]</text>
+  <text x="600" y="348" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">append 没超 cap：仍共享，只是长度各自不同</text>
+  <text x="600" y="374" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">append 超出 cap：t 指向新数组，从此分离</text>
+</svg>

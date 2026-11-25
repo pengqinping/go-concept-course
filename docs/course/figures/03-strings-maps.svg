@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4A5544"/>
+    </marker>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#B8860B"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="480" fill="#F7F8F4"/>
+
+  <text x="400" y="40" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#1F2A1B">同一字符串的两个视图，与 Map 的桶</text>
+  <text x="400" y="64" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#4A5544">索引和 len 数字节，range 走码点；Map 读零值安全，写扩容，遍历无序</text>
+
+  <text x="230" y="100" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">字节索引视图（len / s[i] 的世界）</text>
+
+  <rect x="60" y="112" width="40" height="40" fill="#E7EADF" stroke="#7A846F" stroke-width="1.2"/>
+  <rect x="104" y="112" width="40" height="40" fill="#E7EADF" stroke="#7A846F" stroke-width="1.2"/>
+  <rect x="148" y="112" width="40" height="40" fill="#F0E6C8" stroke="#B8860B" stroke-width="1.2"/>
+  <rect x="192" y="112" width="40" height="40" fill="#F0E6C8" stroke="#B8860B" stroke-width="1.2"/>
+  <rect x="236" y="112" width="40" height="40" fill="#F0E6C8" stroke="#B8860B" stroke-width="1.2"/>
+  <rect x="280" y="112" width="40" height="40" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.2"/>
+  <rect x="324" y="112" width="40" height="40" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.2"/>
+  <rect x="368" y="112" width="40" height="40" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.2"/>
+
+  <text x="80" y="138" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#1F2A1B">G</text>
+  <text x="124" y="138" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#1F2A1B">o</text>
+  <text x="168" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1F2A1B">E8</text>
+  <text x="212" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1F2A1B">AF</text>
+  <text x="256" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1F2A1B">AD</text>
+  <text x="300" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1F2A1B">E8</text>
+  <text x="344" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1F2A1B">A8</text>
+  <text x="388" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1F2A1B">80</text>
+
+  <text x="80" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">0</text>
+  <text x="124" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">1</text>
+  <text x="168" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">2</text>
+  <text x="212" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">3</text>
+  <text x="256" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">4</text>
+  <text x="300" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">5</text>
+  <text x="344" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">6</text>
+  <text x="388" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">7</text>
+
+  <line x1="148" y1="176" x2="148" y2="222" stroke="#B8860B" stroke-width="1.3" stroke-dasharray="3,3"/>
+  <line x1="280" y1="176" x2="280" y2="222" stroke="#B8860B" stroke-width="1.3" stroke-dasharray="3,3"/>
+
+  <text x="230" y="216" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">码点视图（range 的世界）</text>
+
+  <rect x="60" y="228" width="40" height="40" fill="#E7EADF" stroke="#7A846F" stroke-width="1.2"/>
+  <rect x="104" y="228" width="40" height="40" fill="#E7EADF" stroke="#7A846F" stroke-width="1.2"/>
+  <rect x="148" y="228" width="128" height="40" fill="#F0E6C8" stroke="#B8860B" stroke-width="1.2"/>
+  <rect x="280" y="228" width="128" height="40" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.2"/>
+
+  <text x="80" y="254" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#1F2A1B">G</text>
+  <text x="124" y="254" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#1F2A1B">o</text>
+  <text x="212" y="254" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="700" fill="#1F2A1B">语</text>
+  <text x="344" y="254" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="700" fill="#1F2A1B">言</text>
+
+  <text x="80" y="286" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">偏移 0</text>
+  <text x="124" y="286" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">偏移 1</text>
+  <text x="212" y="286" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">偏移 2</text>
+  <text x="344" y="286" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">偏移 5</text>
+
+  <rect x="540" y="112" width="240" height="156" rx="6" fill="#FFFDF7" stroke="#C9CFBE" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="560" y="142" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">len(s) = 8（字节）</text>
+  <text x="560" y="168" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">码点数 = 4</text>
+  <text x="560" y="194" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">range 给出的偏移：0 1 2 5</text>
+  <text x="560" y="220" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">语 占字节 2–4，言 占 5–7</text>
+  <text x="560" y="246" font-family="sans-serif" font-size="11.5" fill="#4A5544">s[i] 是 byte，按字节切多字节字符会切坏</text>
+
+  <line x1="40" y1="312" x2="760" y2="312" stroke="#C9CFBE" stroke-width="1" stroke-dasharray="5,5"/>
+
+  <text x="200" y="342" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1F2A1B">Map：哈希桶</text>
+
+  <rect x="60" y="362" width="90" height="76" rx="6" fill="#E7EADF" stroke="#7A846F" stroke-width="1.5"/>
+  <text x="105" y="390" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#1F2A1B">键</text>
+  <text x="105" y="412" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">go   zh</text>
+
+  <line x1="152" y1="400" x2="206" y2="400" stroke="#4A5544" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="180" y="390" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4A5544">hash</text>
+
+  <text x="360" y="372" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">桶数组</text>
+  <rect x="210" y="380" width="80" height="44" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.2"/>
+  <rect x="294" y="380" width="80" height="44" fill="#EAF0E4" stroke="#6B7F5B" stroke-width="1.2"/>
+  <rect x="378" y="380" width="80" height="44" fill="#F7F8F4" stroke="#C9CFBE" stroke-width="1.2"/>
+  <rect x="462" y="380" width="80" height="44" fill="#F7F8F4" stroke="#C9CFBE" stroke-width="1.2"/>
+  <text x="250" y="407" text-anchor="middle" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">go→2</text>
+  <text x="334" y="407" text-anchor="middle" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">zh→1</text>
+  <text x="418" y="407" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">空</text>
+  <text x="502" y="407" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4A5544">空</text>
+
+  <text x="600" y="368" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">读缺失键 → 空桶，返回零值</text>
+  <text x="600" y="394" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">桶满写不进 → 扩容，搬迁旧数据</text>
+  <text x="600" y="420" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">遍历起点每次随机，输出要稳定先排序</text>
+  <text x="600" y="446" font-family="sans-serif" font-size="12.5" fill="#1F2A1B">nil map：只能读，写直接 panic</text>
+
+  <text x="400" y="470" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#4A5544">桶的布局、扩容细节、遍历顺序都不是语言契约</text>
+</svg>

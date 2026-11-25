@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="t d">
+  <title id="t">泛型适用性决策树</title>
+  <desc id="d">依次判断同一算法、多类型、是否依赖类型自身运算，导向泛型、接口或具体函数三种答案。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" fill="#F7F8F4"/>
+  <g font-family="PingFang SC,Microsoft YaHei,sans-serif">
+    <text x="40" y="46" font-size="23" font-weight="700" fill="#1f2937">泛型该不该用：三个问题，三个答案</text>
+    <text x="40" y="74" font-size="14" fill="#475569">从上往下走；每次回答"否"都要停一次，看看是不是根本不需要抽象。</text>
+
+    <rect x="300" y="96" width="200" height="56" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="300" y="200" width="200" height="56" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="300" y="304" width="200" height="56" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+
+    <g text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">
+      <text x="400" y="130">Q1 同一套算法骨架？</text>
+      <text x="400" y="234">Q2 要支持多种类型？</text>
+      <text x="400" y="338">Q3 依赖类型自身运算？</text>
+    </g>
+
+    <g fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)">
+      <line x1="400" y1="152" x2="400" y2="198"/>
+      <line x1="400" y1="256" x2="400" y2="302"/>
+      <line x1="500" y1="124" x2="616" y2="158"/>
+      <line x1="500" y1="228" x2="616" y2="242"/>
+      <path d="M300,332 L170,332 L170,398"/>
+      <line x1="400" y1="360" x2="400" y2="398"/>
+      <path d="M500,332 L660,332 L660,398"/>
+    </g>
+
+    <g font-size="12" font-weight="700" fill="#475569">
+      <text x="414" y="180">是</text>
+      <text x="414" y="284">是</text>
+      <text x="546" y="136">否</text>
+      <text x="546" y="236">否</text>
+      <text x="232" y="324">否：只搬运</text>
+      <text x="452" y="386">是：共有</text>
+      <text x="578" y="324">是：各自方法</text>
+    </g>
+
+    <rect x="620" y="140" width="154" height="120" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+    <g text-anchor="middle" fill="#1f2937">
+      <text x="697" y="188" font-size="16" font-weight="700">具体函数</text>
+      <text x="697" y="214" font-size="12">算法各不相同</text>
+      <text x="697" y="236" font-size="12">或只有一种类型</text>
+    </g>
+
+    <rect x="60" y="400" width="200" height="58" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+    <rect x="300" y="400" width="200" height="58" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+    <rect x="560" y="400" width="200" height="58" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+
+    <g text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">
+      <text x="160" y="426">泛型 · Map[In,Out]</text>
+      <text x="400" y="426">泛型 · 带约束</text>
+      <text x="660" y="426">接口</text>
+    </g>
+    <g text-anchor="middle" font-size="12" fill="#475569">
+      <text x="160" y="446">不碰类型特有运算</text>
+      <text x="400" y="446">共有算术运算</text>
+      <text x="660" y="446">依赖各自的方法/行为</text>
+    </g>
+
+    <text x="40" y="482" font-size="12" fill="#64748b">绿色 = 泛型真正划算的两种情形；灰色 = 具体函数或接口更直接。</text>
+  </g>
+</svg>

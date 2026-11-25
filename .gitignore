@@ -1,0 +1,6 @@
+# 工作区内部数据，不入库
+.workbuddy/
+.backup-*
+
+# 系统与工具产物
+.DS_Store
